@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햇살 소아청소년과 | 우리 아이의 건강을 지키는 따뜻한 손길</title>
+    <style>
+        /* 밝고 따뜻한 색상 팔레트: 파스텔 톤 */
+        :root {
+            --primary-color: #FFB6C1; /* 연한 핑크 */
+            --secondary-color: #87CEEB; /* 스카이 블루 */
+            --accent-color: #FFD700; /* 골드 옐로우 */
+            --warm-white: #FFF8E7; /* 따뜻한 화이트 */
+            --text-primary: #333;
+            --text-secondary: #666;
+            --shadow: 0 4px 12px rgba(255,182,193,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--warm-white);
+        }
+
+        /* 헤더: 고정 네비게이션 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* 햄버거 메뉴 (모바일) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        /* 메인 섹션 */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 1.5rem 4rem;
+            border-radius: 0 0 50px 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+        }
+
+        /* 카드 그리드 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(135,206,235,0.4);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        /* 의료진 소개 */
+        .doctors-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* 푸터 */
+        footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">🌞 햇살 소아청소년과</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#intro">병원소개</a></li>
+                <li><a href="#guide">진료안내</a></li>
+                <li><a href="#contact">문의하기</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 히어로 섹션 -->
+        <section id="home" class="hero">
+            <h1>우리 아이의 웃음을 지키는<br>따뜻한 손길</h1>
+            <p>햇살 소아청소년과에서 아이의 건강을 세심하게 돌봅니다.<br>작은 기침부터 성장 고민까지, 언제든지 찾아오세요!</p>
+            <a href="#contact" class="cta-button">지금 문의하기</a>
+        </section>
+
+        <!-- 병원 소개 -->
+        <section id="intro">
+            <h2 style="text-align: center; color: var(--primary-color); font-size: 2.5rem; margin-bottom: 3rem;">
+                병원 소개
+            </h2>
+            
+            <div class="grid">
+                <!-- 의료진 소개 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80x80/FFB6C1/FFFFFF?text=👩‍⚕️" alt="의사">
+                    <h3>최선아 원장</h3>
+                    <p>소아청소년 전문의 10년 경력<br>아이와 부모님의 든든한 버팀목!</p>
+                </div>
+                
+                <!-- 추가 의료진 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80x80/87CEEB/FFFFFF?text=👨‍⚕️" alt="의사">
+                    <h3>김영준 전문의</h3>
+                    <p>성장·호르몬 전문<br>키가 작아요? 걱정 마세요!</p>
+                </div>
+
+                <!-- 병원 둘러보기 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80x80/FFD700/FFFFFF?text=🏥" alt="병원">
+                    <h3>편안한 진료 환경</h3>
+                    <p>아이들이 좋아하는 동화책과 장난감이<br>가득한 아기자기한 병원입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 진료안내 -->
+        <section id="guide" style="background: rgba(135,206,235,0.1);">
+            <h2 style="text-align: center; color: var(--secondary-color); font-size: 2.5rem; margin-bottom: 3rem;">
+                진료안내
+            </h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🕒 진료시간</h3>
+                    <p><strong>평일</strong><br>오전 9:00 ~ 오후 6:00<br><strong>토요일</strong><br>오전 9:00 ~ 오후 1:00<br><strong>점심시간</strong><br>12:30 ~ 1:30</p>
+                </div>
+
+                <div class="card">
+                    <h3>📍 오시는 길</h3>
+                    <p>지하철 2호선 ○○역 3번출구<br>도보 2분<br>주차 완전 무료!<br>💕 엄마들 편의를 최우선으로</p>
+                </div>
+
+                <div class="card">
+                    <h3>💉 예방접종</h3>
+                    <p>국가필수접종 무료<br>수입백신도 저렴하게!<br>맞춤 예방접종 스케줄 제공</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 문의 -->
+        <section id="contact">
+            <h2 style="text-align: center; color: var(--accent-color); font-size: 2.5rem; margin-bottom: 3rem;">
+                문의하기
+            </h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>❓ 자주 묻는 질문</h3>
+                    <ul style="text-align: left;">
+                        <li>Q: 예약은 어떻게 하나요?</li>
+                        <li>A: 전화 또는 온라인으로 가능합니다!</li>
+                        <li>Q: 야간 진료는 되나요?</li>
+                        <li>A: 토요일 오후 1시까지 운영합니다.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📞 연락처</h3>
+                    <p><strong>전화</strong><br>02-1234-5678<br><strong>시간</strong><br>오전 8:30 ~ 오후 7:00<br><strong>카카오톡</strong><br>@햇살소아과</p>
+                </div>
+
+                <div class="card" style="background: var(--primary-color); color: white;">
+                    <h3 style="color: white;">지금 바로 예약하세요!</h3>
+                    <p>아이의 건강을 위한 첫걸음,<br>햇살 소아청소년과와 함께!</p>
+                    <a href="tel:0212345678" class="cta-button" style="margin-top: 1rem; background: white; color: var(--primary-color);">전화 걸기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>🌞 햇살 소아청소년과 | 서울시 ○○구 ○○로 123 | 사업자등록번호: 123-45-67890</p>
+        <p>대표원장 최선아 | Copyright © 2024 햇살소아청소년과 All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 모바일 햄버거 메뉴
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 네비게이션 스무스 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer로 애니메이션 트리거
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</body>
+</html>

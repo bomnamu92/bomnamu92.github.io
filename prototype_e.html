@@ -1,0 +1,1673 @@
+html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햇살 소아청소년과 의원</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FFB347;
+            --primary-dark: #FF9500;
+            --secondary: #87CEEB;
+            --mint: #98D8C8;
+            --bg: #FFFDF7;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --radius: 16px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .main-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .logo-text .sub-title {
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+
+        /* Desktop Nav */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li > a {
+            display: block;
+            padding: 10px 16px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        nav ul li > a:hover {
+            background: #FFF3E0;
+            color: var(--primary-dark);
+        }
+
+        /* Dropdown */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            min-width: 160px;
+            padding: 8px;
+            z-index: 999;
+        }
+
+        nav ul li:hover .dropdown-menu {
+            display: block;
+            animation: fadeDown 0.2s ease;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 9px 14px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 14px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #FFF3E0;
+            color: var(--primary-dark);
+        }
+
+        /* CTA Button */
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white) !important;
+            padding: 10px 20px !important;
+            border-radius: 25px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 15px rgba(255,149,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,149,0,0.4) !important;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+            color: white !important;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background: var(--white);
+            border-top: 1px solid #f0f0f0;
+            padding: 15px 20px 20px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu-item {
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .mobile-menu-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 0;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .mobile-sub-menu {
+            display: none;
+            padding: 5px 0 10px 15px;
+        }
+
+        .mobile-sub-menu.active {
+            display: block;
+        }
+
+        .mobile-sub-menu a {
+            display: block;
+            padding: 8px 0;
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, #FFF8EC 0%, #E8F4FD 50%, #E8F8F5 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🌟';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.04;
+            top: -50px;
+            left: -50px;
+        }
+
+        .hero::after {
+            content: '🌈';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.04;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 52px);
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary-dark);
+        }
+
+        .hero p {
+            font-size: clamp(15px, 2vw, 18px);
+            color: var(--text-gray);
+            max-width: 550px;
+            margin: 0 auto 35px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(255,149,0,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,149,0,0.45);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-dark);
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            border: 2px solid var(--primary);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Icons */
+        .floating-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .floating-icon {
+            background: white;
+            border-radius: 20px;
+            padding: 18px 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(2) { animation-delay: 0.5s; }
+        .floating-icon:nth-child(3) { animation-delay: 1s; }
+        .floating-icon:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .floating-icon .icon-emoji {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ===== QUICK INFO ===== */
+        .quick-info {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 30px 20px;
+        }
+
+        .quick-info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .quick-info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .quick-info-item .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .quick-info-item .info-text .label {
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .quick-info-item .info-text .value {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ===== SECTION BASE ===== */
+        section {
+            padding: 70px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: #FFF3E0;
+            color: var(--primary-dark);
+            padding: 5px 16px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-gray);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        #about {
+            background: var(--white);
+        }
+
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .doctor-card {
+            background: linear-gradient(135deg, #FFFDF7, #FFF8EC);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #FFE0B2;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .doctor-card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+        }
+
+        .doctor-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            color: var(--primary-dark);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 10px;
+        }
+
+        .doctor-card-body {
+            padding: 20px;
+        }
+
+        .doctor-card-body h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .doctor-card-body .position {
+            font-size: 13px;
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .doctor-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .doctor-spec-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .doctor-spec-item::before {
+            content: '✅';
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-placeholder {
+            background: linear-gradient(135deg, #FFE0B2, #FFF3E0);
+            height: 100%;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .gallery-placeholder .emoji {
+            font-size: 40px;
+        }
+
+        .gallery-item.large .gallery-placeholder {
+            min-height: 415px;
+        }
+
+        /* ===== SCHEDULE SECTION ===== */
+        #schedule {
+            background: linear-gradient(135deg, #E8F4FD 0%, #E8F8F5 100%);
+        }
+
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .schedule-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .schedule-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .schedule-table th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+
+        .schedule-table th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+
+        .schedule-table td {
+            padding: 10px 12px;
+            text-align: center;
+            font-size: 13px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .schedule-table tr:hover td {
+            background: #FFF8EC;
+        }
+
+        .schedule-table td.day {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .schedule-table td.closed {
+            color: #ccc;
+        }
+
+        .open-badge {
+            display: inline-block;
+            background: #E8F8F0;
+            color: #27AE60;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .notice-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFF8EC);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 16px;
+            margin-top: 18px;
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #E8F4FD, #EEF7FF);
+            border-radius: 12px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #4A90D9;
+            font-weight: 600;
+            font-size: 15px;
+            border: 2px dashed #87CEEB;
+            margin-bottom: 15px;
+        }
+
+        .transport-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .transport-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .transport-badge {
+            background: var(--secondary);
+            color: #1a6fa8;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .transport-badge.green {
+            background: #C8F0E0;
+            color: #1a7a4a;
+        }
+
+        .transport-badge.orange {
+            background: #FFE5C0;
+            color: #b35a00;
+        }
+
+        /* ===== VACCINATION SECTION ===== */
+        #vaccination {
+            background: var(--white);
+        }
+
+        .vaccine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .vaccine-card {
+            background: linear-gradient(135deg, #F0F9FF, #E8F8F5);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid #B2EBF2;
+            transition: transform 0.3s;
+        }
+
+        .vaccine-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vaccine-card .emoji {
+            font-size: 40px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .vaccine-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .vaccine-card p {
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .vaccine-card .age-tag {
+            display: inline-block;
+            background: var(--mint);
+            color: #2d7a6a;
+            padding: 3px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* ===== FAQ SECTION ===== */
+        #faq {
+            background: linear-gradient(135deg, #FFF8EC 0%, #FFF3E0 100%);
+        }
+
+        .faq-list {
+            max-width: 750px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid #FFE0B2;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            gap: 15px;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #FFF8EC;
+        }
+
+        .faq-question.active {
+            background: linear-gradient(135deg, #FFF3E0, #FFF8EC);
+            color: var(--primary-dark);
+        }
+
+        .faq-q-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .faq-arrow {
+            font-size: 12px;
+            color: var(--primary-dark);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-question.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 5px 20px 18px 60px;
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .faq-answer.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #2C2C2C;
+            color: #aaa;
+            padding: 50px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .logo-text .main-title {
+            color: var(--primary);
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            line-height: 1.8;
+            margin-top: 12px;
+            color: #888;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: #888;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .footer-contact-item i {
+            color: var(--primary);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #3a3a3a;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .footer-sns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-sns a {
+            width: 36px;
+            height: 36px;
+            background: #3a3a3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .footer-sns a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,149,0,0.4);
+            font-size: 18px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px);
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hamburger { display: flex; }
+
+            .schedule-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-item.large {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .gallery-item.large .gallery-placeholder {
+                min-height: 200px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .quick-info-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .floating-icons {
+                gap: 10px;
+            }
+
+            .floating-icon {
+                padding: 12px 16px;
+                font-size: 12px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.large {
+                grid-column: span 1;
+            }
+
+            .quick-info-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="nav-container">
+        <a href="#" class="logo">
+            <div class="logo-icon">☀️</div>
+            <div class="logo-text">
+                <span class="main-title">햇살 소아청소년과</span>
+                <span class="sub-title">아이들의 건강한 내일을 함께</span>
+            </div>
+        </a>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="#about">병원 소개 ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#doctors">👨‍⚕️ 의료진 소개</a></li>
+                        <li><a href="#gallery">🏥 병원 둘러보기</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#schedule">진료안내 ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#hours">🕐 진료시간</a></li>
+                        <li><a href="#location">📍 오시는 길</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#vaccination">문의 ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#vaccination">💉 예방접종 안내</a></li>
+                        <li><a href="#faq">❓ 자주 묻는 질문</a></li>
+                    </ul>
+                </li>
+                <li><a href="tel:0212345678" class="nav-cta">📞 전화 예약</a></li>
+            </ul>
+        </nav>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-item">
+            <div class="mobile-menu-title" onclick="toggleSub(this)">
+                🏥 병원 소개 <span>▾</span>
+            </div>
+            <div class="mobile-sub-menu">
+                <a href="#doctors" onclick="closeMobileMenu()">👨‍⚕️ 의료진 소개</a>
+                <a href="#gallery" onclick="closeMobileMenu()">🏥 병원 둘러보기</a>
+            </div>
+        </div>
+        <div class="mobile-menu-item">
+            <div class="mobile-menu-title" onclick="toggleSub(this)">
+                📋 진료안내 <span>▾</span>
+            </div>
+            <div class="mobile-sub-menu">
+                <a href="#hours" onclick="closeMobileMenu()">🕐 진료시간</a>
+                <a href="#location" onclick="closeMobileMenu()">📍 오시는 길</a>
+            </div>
+        </div>
+        <div class="mobile-menu-item">
+            <div class="mobile-menu-title" onclick="toggleSub(this)">
+                💬 문의 <span>▾</span>
+            </div>
+            <div class="mobile-sub-menu">
+                <a href="#vaccination" onclick="closeMobileMenu()">💉 예방접종 안내</a>
+                <a href="#faq" onclick="closeMobileMenu()">❓ 자주 묻는 질문</a>
+            </div>
+        </div>
+        <div style="padding: 15px 0 5px;">
+            <a href="tel:0212345678" class="btn-primary" style="width:100%; justify-content:center;">
+                📞 전화 예약하기
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-badge">✨ 아이와 함께하는 따뜻한 의료</div>
+    <h1>우리 아이의 건강,<br><span>햇살처럼 밝게</span> 지켜드려요</h1>
+    <p>아이들의 눈높이에서 바라보는 따뜻한 진료,<br>
+    부모님의 마음으로 소중히 돌보겠습니다 🌟</p>
+    <div class="hero-buttons">
+        <a href="tel:0212345678" class="btn-primary">📞 전화 예약하기</a>
+        <a href="#schedule" class="btn-secondary">🕐 진료시간 확인</a>
+    </div>
+    <div class="floating-icons">
+        <div class="floating-icon">
+            <span class="icon-emoji">👶</span>
+            신생아 진료
+        </div>
+        <div class="floating-icon">
+            <span class="icon-emoji">💉</span>
+            예방접종
+        </div>
+        <div class="floating-icon">
+            <span class="icon-emoji">🩺</span>
+            성장 발달
+        </div>
+        <div class="floating-icon">
+            <span class="icon-emoji">🤧</span>
+            소아 질환
+        </div>
+    </div>
+</section>
+
+<!-- ===== QUICK INFO ===== -->
+<div class="quick-info">
+    <div class="quick-info-container">
+        <div class="quick-info-item">
+            <div class="icon">📞</div>
+            <div class="info-text">
+                <div class="label">대표 전화</div>
+                <div class="value">02-1234-5678</div>
+            </div>
+        </div>
+        <div class="quick-info-item">
+            <div class="icon">🕐</div>
+            <div class="info-text">
+                <div class="label">평일 진료시간</div>
+                <div class="value">09:00 ~ 18:00</div>
+            </div>
+        </div>
+        <div class="quick-info-item">
+            <div class="icon">📅</div>
+            <div class="info-text">
+                <div class="label">토요일 진료</div>
+                <div class="value">09:00 ~ 13:00</div>
+            </div>
+        </div>
+        <div class="quick-info-item">
+            <div class="icon">📍</div>
+            <div class="info-text">
+                <div class="label">위치</div>
+                <div class="value">서울시 강남구 햇살로 123</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ABOUT: DOCTORS ===== -->
+<section id="about" style="background: var(--white);">
+    <div class="container">
+        <div id="doctors"></div>
+        <div class="section-header">
+            <div class="section-badge">👨‍⚕️ 의료진 소개</div>
+            <h2>아이를 진심으로 사랑하는<br>우리 의료팀을 만나보세요</h2>
+            <p>경험과 따뜻한 마음을 갖춘 의료진이<br>아이의 건강을 함께 지킵니다</p>
+        </div>
+        <div class="doctor-grid">
+            <div class="doctor-card">
+                <div class="doctor-card-header">
+                    👨‍⚕️
+                    <span class="doctor-card-badge">원장</span>
+                </div>
+                <div class="doctor-card-body">
+                    <h3>김햇살 원장</h3>
+                    <div class="position">소아청소년과 전문의</div>
+                    <div class="doctor-specs">
+                        <div class="doctor-spec-item">서울대학교 의과대학 졸업</div>
+                        <div class="doctor-spec-item">전 서울아산병원 소아과 전공의</div>
+                        <div class="doctor-spec-item">소아 알레르기·호흡기 전문</div>
+                        <div class="doctor-spec-item">성장발달 클리닉 운영</div>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-card">
+                <div class="doctor-card-header" style="background: linear-gradient(135deg, var(--mint), var(--secondary));">
+                    👩‍⚕️
+                    <span class="doctor-card-badge">부원장</span>
+                </div>
+                <div class="doctor-card-body">
+                    <h3>이미소 부원장</h3>
+                    <div class="position">소아청소년과 전문의</div>
+                    <div class="doctor-specs">
+                        <div class="doctor-spec-item">연세대학교 의과대학 졸업</div>
+                        <div class="doctor-spec-item">전 세브란스병원 소아과 전공의</div>
+                        <div class="doctor-spec-item">신생아·영유아 진료 전문</div>
+                        <div class="doctor-spec-item">예방접종 전문 클리닉</div>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-card">
+                <div class="doctor-card-header" style="background: linear-gradient(135deg, #FFB347, var(--mint));">
+                    👨‍⚕️
+                    <span class="doctor-card-badge">진료의</span>
+                </div>
+                <div class="doctor-card-body">
+                    <h3>박따뜻 선생님</h3>
+                    <div class="position">소아청소년과 전문의</div>
+                    <div class="doctor-specs">
+                        <div class="doctor-spec-item">고려대학교 의과대학 졸업</div>
+                        <div class="doctor-spec-item">전 삼성서울병원 소아과 전공의</div>
+                        <div class="doctor-spec-item">소아 감염·열성 질환 전문</div>
+                        <div class="doctor-spec-item">청소년 상담 클리닉</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="background: #F9F9F9; padding: 50px 20px;">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">🏥 병원 둘러보기</div>
+            <h2>따뜻하고 편안한<br>공간을 만들었어요</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item large">
+                <div class="gallery-placeholder">
+                    <span class="emoji">🏥</span>
+                    진료 대기실
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="emoji">🩺</span>
+                    진료실
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="emoji">💉</span>
+                    처치실
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="emoji">🎨</span>
+                    놀이 공간
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span class="emoji">🍼</span>
+                    수유실
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SCHEDULE ===== -->
+<section id="schedule">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">📋 진료안내</div>
+            <h2>언제든지 편하게<br>방문해 주세요</h2>
+            <p>예약 없이도 방문 가능하나,<br>전화 예약 시 대기 시간이 줄어들어요</p>
+        </div>
+        <div class="schedule-container">
+            <!-- 진료시간 -->
+            <div class="schedule-card" id="hours">
+                <h3>🕐 진료시간</h3>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>요일</th>
+                            <th>오전</th>
+                            <th>오후</th>
+                            <th>점심</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day">월 · 화 · 목</td>
+                            <td>09:00</td>
+                            <td>18:00</td>
+                            <td>13:00~14:00</td>
+                        </tr>
+                        <tr>
+                            <td class="day">수요일</td>
+                            <td>09:00</td>
+                            <td>13:00</td>
+                            <td class="closed">-</td>
+                        </tr>
+                        <tr>
+                            <td class="day">금요일</td>
+                            <td>09:00</td>
+                            <td>18:00</td>
+                            <td>13:00~14:00</td>
+                        </tr>
+                        <tr>
+                            <td class="day">토요일</td>
+                            <td>09:00</td>
+                            <td>13:00</td>
+                            <td class="closed">-</td>
+                        </tr>
+                        <tr>
+                            <td class="day">일 · 공휴일</td>
+                            <td class="closed" colspan="3">휴진</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="notice-box">
+                    🌟 <strong>공휴일 전날</strong>은 정상 진료합니다<br>
+                    📌 <strong>점심시간</strong>에도 예방접종은 가능합니다<br>
+                    📞 <strong>당일 예약</strong>은 전화로 확인해 주세요
+                </div>
+            </div>
+
+            <!-- 오시는 길 -->
+            <div class="schedule-card" id="location">
+                <h3>📍 오시는 길</h3>
+                <div class="map-placeholder">
+                    <span style="font-size:40px">🗺️</span>
+                    지도 영역 (카카오맵 / 네이버맵 삽입)
+                </div>
+                <p style="font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 12px;">
+                    📌 서울시 강남구 햇살로 123, 햇살빌딩 3층
+                </p>
+                <div class="transport-list">
+                    <div class="transport-item">
+                        <span class="transport-badge">지하철</span>
+                        2호선 강남역 3번 출구 도보 5분
+                    </div>
+                    <div class="transport-item">
+                        <span class="transport-badge green">버스</span>
+                        146, 360, 740번 햇살빌딩 앞 정류장
+                    </div>
+                    <div class="transport-item">
+                        <span class="transport-badge orange">주차</span>
+                        건물 지하 1~3층 (2시간 무료)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VACCINATION ===== -->
+<section id="vaccination">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">💉 예방접종 안내</div>
+            <h2>시기에 맞는 예방접종으로<br>아이를 지켜주세요</h2>
+            <p>국가 무료 접종부터 선택 접종까지<br>전문 의료진이 안전하게 도와드립니다</p>
+        </div>
+        <div class="vaccine-grid">
+            <div class="vaccine-card">
+                <span class="emoji">👶</span>
+                <h4>BCG · B형 간염</h4>
+                <p>결핵 예방과 B형 간염 기초 접종</p>
+                <span class="age-tag">출생 직후</span>
+            </div>
+            <div class="vaccine-card">
+                <span class="emoji">🍼</span>
+                <h4>DTaP · 폴리오</h4>
+                <p>디프테리아, 파상풍, 백일해, 소아마비 예방</p>
+                <span class="age-tag">2 · 4 · 6개월</span>
+            </div>
+            <div class="vaccine-card">
+                <span class="emoji">🐄</span>
+                <h4>MMR · 수두</h4>
+                <p>홍역, 유행성이하선염, 풍진, 수두 예방</p>
+                <span class="age-tag">12~15개월</span>
+            </div>
+            <div class="vaccine-card">
+                <span class="emoji">🤧</span>
+                <h4>독감 (인플루엔자)</h4>
+                <p>매년 맞는 독감 예방 접종</p>
+                <span class="age-tag">매년 9~11월</span>
+            </div>
+            <div class="vaccine-card">
+                <span class="emoji">🦠</span>
+                <h4>폐렴구균</h4>
+                <p>폐렴, 중이염, 수막염 예방</p>
+                <span class="age-tag">2 · 4 · 6 · 12개월</span>
+            </div>
+            <div class="vaccine-card">
+                <span class="emoji">🩺</span>
+                <h4>일본뇌염</h4>
+                <p>모기 매개 일본뇌염 바이러스 예방</p>
+                <span class="age-tag">12개월 이후</span>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top: 35px;">
+            <a href="tel:0212345678" class="btn-primary">
+                💬 접종 일정 상담하기
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">❓ 자주 묻는 질문</div>
+            <h2>궁금한 점을<br>먼저 확인해 보세요</h2>
+        </div>
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-icon">Q</div>
+                    <span style="flex:1">예약 없이 방문해도 진료를 받을 수 있나요?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    네, 예약 없이도 방문하시면 순서대로 진료해 드립니다. 다만 <strong>전화 예약 시</strong> 대기 시간이 훨씬 단축되므로 가능하면 사전 예약을 권장드립니다. 📞 02-1234-5678
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-icon">Q</div>
+                    <span style="flex:1">예방접종 전날 준비할 것이 있나요?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    접종 전날에는 아이가 충분히 수면을 취하고, 목욕을 미리 시켜주세요. 접종 당일 <strong>열이 있거나 컨디션이 좋지 않은 경우</strong>에는 미리 전화 주시면 일정을 조율해 드립니다. 모자 건강수첩 지참도 부탁드립니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-icon">Q</div>
+                    <span style="flex:1">밤에 아이에게 열이 나면 어떻게 해야 하나요?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    38도 미만이면 충분한 수분 섭취와 휴식을 취하게 하세요. <strong>38도 이상이면</strong> 연령에 맞는 해열제를 사용하시고, 39도 이상 고열이 지속되거나 경련이 있을 경우 응급실을 방문하세요. 자세한 문의는 <strong>소아과 야간 상담 전화</strong>를 이용해 주세요.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-icon">Q</div>
+                    <span style="flex:1">신생아도 진료 가능한가요?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    네, <strong>출생 직후 신생아</strong>부터 청소년(만 18세)까지 모두 진료 가능합니다. 신생아 진료는 오전 시간대를 권장하며, 첫 방문 시 산모 수첩과 진료 기록을 지참해 주시면 더욱 원활한 진료가 가능합니다. 👶
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-icon">Q</div>
+                    <span style="flex:1">건강보험이 적용되나요?</span>
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    네, 일반 진료 및 국가 필수 예방접종은 <strong>건강보험이 적용</strong>됩니다. 국가 예방접종 지원 사업(NIP) 대상 접종은 무료로 진행됩니다. 일부 선택 예방접종은 비급여 항목일 수 있으니 내원 전 전화 문의를 권장합니다.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon">☀️</div>
+                    <div class="logo-text">
+                        <span class="main-title">햇살 소아청소년과</span>
+                        <span class="sub-title" style="color:#666">아이들의 건강한 내일을 함께</span>
+                    </div>
+                </div>
+                <p>따뜻하고 전문적인 의료 서비스로<br>
+                아이와 가족 모두가 행복한<br>
+                햇살 소아청소년과입니다.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>빠른 메뉴</h4>
+                <ul>
+                    <li><a href="#doctors">👨‍⚕️ 의료진 소개</a></li>
+                    <li><a href="#gallery">🏥 병원 둘러보기</a></li>
+                    <li><a href="#hours">🕐 진료시간</a></li>
+                    <li><a href="#location">📍 오시는 길</a></li>
+                    <li><a href="#vaccination">💉 예방접종</a></li>
+                    <li><a href="#faq">❓ 자주 묻는 질문</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>연락처 & 위치</h4>
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>02-1234-5678</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-fax"></i>
+                    <span>02-1234-5679</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@hatssal.co.kr</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>서울시 강남구 햇살로 123<br>햇살빌딩 3층</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 햇살 소아청소년과. All rights reserved.</p>
+            <div class="footer-sns">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fas fa-blog"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll To Top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    ▲
+</button>
+
+<script>
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+    }
+
+    function closeMobileMenu() {
+        document.getElementById('mobileMenu').classList.remove('active');
+    }
+
+    // Mobile Sub Menu
+    function toggleSub(el) {
+        const sub = el.nextElementSibling;
+        sub.classList.toggle('active');
+        const arrow = el.querySelector('span');
+        arrow.textContent = sub.classList.contains('active') ? '▲' : '▾';
+    }
+
+    // FAQ Toggle
+    function toggleFaq(el) {
+        const answer = el.nextElementSibling;
+        const allAnswers = document.querySelectorAll('.faq-answer');
+        const allQuestions = document.querySelectorAll('.faq-question');
+
+        allAnswers.forEach(a => {
+            if (a !== answer) {
+                a.classList.remove('active');
+            }
+        });
+        allQuestions.forEach(q => {
+            if (q !== el) {
+                q.classList.remove('active');
+            }
+        });
+
+        el.classList.toggle('active');
+        answer.classList.toggle('active');
+    }
+
+    // Scroll To Top Button
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('scrollTop');
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });920
